@@ -31,7 +31,7 @@ export function AppPromo() {
         </Reveal>
         <div className="relative mx-auto h-[560px] w-full max-w-md">
           <img src={lemon} alt="" aria-hidden="true" loading="lazy" className="absolute -right-16 -top-6 w-[420px] rotate-6" />
-          <div className="animate-float absolute bottom-0 left-1/2 w-[250px] -translate-x-1/2 rounded-[40px] bg-foreground p-2.5 shadow-soft" style={{ marginLeft: -125, left: "50%" }}>
+          <div className="animate-float absolute bottom-0 left-1/2 w-[250px] rounded-[40px] bg-foreground p-2.5 shadow-soft" style={{ marginLeft: -125, left: "50%" }}>
             <div className="overflow-hidden rounded-[32px] bg-background">
               <div className="flex justify-between px-5 pt-3 text-[10px] font-medium"><span>9:41</span><span>●●●</span></div>
               <div className="p-4">
