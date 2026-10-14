@@ -20,7 +20,7 @@ export function HeroCarousel() {
     return () => clearInterval(t);
   }, [i, go]);
 
-  const s = slides[i];
+  const s = slides[i] ?? slides[0]!;
   return (
     <section id="top" className="relative h-[70vh] overflow-hidden md:h-[85vh]" aria-roledescription="carousel" aria-label="Featured">
       <AnimatePresence mode="sync">
