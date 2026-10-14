@@ -1,24 +1,53 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
+import { Navbar } from "@/components/site/Navbar";
+import { HeroCarousel } from "@/components/site/HeroCarousel";
+import { MenuTabs } from "@/components/site/MenuTabs";
+import { OrderDrawer } from "@/components/site/OrderDrawer";
+import { AppPromo, Mission, Locations, Newsletter, Footer } from "@/components/site/Sections";
+import type { MenuItem } from "@/data/menu";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Leafwise – Fresh Salads & Warm Bowls" },
+      { name: "description", content: "Seasonal salads, warm bowls and fresh sides made from scratch with produce from local farms. Order pickup or delivery." },
+      { property: "og:title", content: "Leafwise – Fresh Salads & Warm Bowls" },
+      { property: "og:description", content: "Seasonal salads, warm bowls and fresh sides made from scratch with local produce." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [selected, setSelected] = useState<MenuItem | null>(null);
+  const [count, setCount] = useState(0);
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <>
+      <Navbar cartCount={count} />
+      <main>
+        <HeroCarousel />
+        <MenuTabs onOrder={setSelected} />
+        <AppPromo />
+        <Mission />
+        <Locations />
+        <Newsletter />
+      </main>
+      <Footer />
+      <OrderDrawer
+        item={selected}
+        onClose={() => setSelected(null)}
+        onAdd={(q) => {
+          setCount((c) => c + q);
+          toast.success(`${selected?.name} added to your order`);
+          setSelected(null);
+        }}
       />
-    </div>
+      <Toaster />
+    </>
   );
 }
