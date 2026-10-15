@@ -78,10 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Leafwise – Fresh Salads & Warm Bowls" },
-      { name: "description", content: "Seasonal salads and warm bowls made with local produce." },
-      { property: "og:title", content: "Leafwise – Fresh Salads & Warm Bowls" },
-      { property: "og:description", content: "Seasonal salads and warm bowls made with local produce." },
+      { title: "Ôcrepino — Petit-déjeuner & brunch à Salé" },
+      { name: "description", content: "Découvrez la carte petit-déjeuner et brunch d’Ôcrepino à Salé." },
+      { property: "og:title", content: "Ôcrepino — Petit-déjeuner & brunch à Salé" },
+      { property: "og:description", content: "Découvrez la carte petit-déjeuner et brunch d’Ôcrepino à Salé." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -96,7 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Instrument+Sans:wght@300;400;500;600&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,
@@ -107,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <HeadContent />
       </head>
