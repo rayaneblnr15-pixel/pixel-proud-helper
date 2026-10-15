@@ -1,76 +1,21 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { categories, menu, type Category, type MenuItem } from "@/data/menu";
+import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { categories, menu, breakfastIncluded, formatPrice, type Category } from "@/data/menu";
+import carte from "@/assets/ocrepino-carte.png.asset.json";
+import moroccan from "@/assets/ocrepino-moroccan.jpg";
 import { Reveal } from "./Reveal";
 
-function ProductCard({ item, onOrder }: { item: MenuItem; onOrder: (i: MenuItem) => void }) {
+export function MenuTabs() {
+  const [active, setActive] = useState<Category>("Petits-déjeuners");
   return (
-    <article className="group w-[82%] shrink-0 snap-start sm:w-auto">
-      <div className="relative overflow-hidden rounded-3xl bg-beige transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-soft">
-        <img src={item.image} alt={`${item.name} bowl, top-down view`} loading="lazy" width={1024} height={896} className="aspect-[4/3.5] w-full object-cover" />
-        {item.popular && (
-          <span className="absolute left-4 top-4 rounded-full bg-secondary px-3 py-1 label-caps text-secondary-foreground">Popular</span>
-        )}
-        {(item.glutenFree || item.containsGluten) && (
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button className="absolute right-4 top-4 grid h-7 w-7 place-items-center rounded-full border border-foreground/60 text-xs font-medium" aria-label={item.glutenFree ? "Gluten-free" : "Contains gluten"}>
-                G
-              </button>
-            </TooltipTrigger>
-            <TooltipContent>{item.glutenFree ? "Gluten-free" : "Contains gluten"}</TooltipContent>
-          </Tooltip>
-        )}
-      </div>
-      <h3 className="mt-5 text-base font-medium uppercase tracking-wide">{item.name}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-foreground/80">{item.description}</p>
-      <button onClick={() => onOrder(item)} className="group/link mt-4 inline-flex items-center gap-1.5 text-sm font-medium">
-        Order now <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1" />
-      </button>
-    </article>
-  );
-}
-
-export function MenuTabs({ onOrder }: { onOrder: (i: MenuItem) => void }) {
-  const [active, setActive] = useState<Category>("Salads");
-  return (
-    <section id="menu" className="scroll-mt-16 py-20">
+    <section id="menu" className="scroll-mt-20 py-20">
       <div className="container-x">
-        <Reveal>
-          <div role="tablist" aria-label="Menu categories" className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            {categories.map((c) => (
-              <button
-                key={c}
-                role="tab"
-                aria-selected={active === c}
-                onClick={() => setActive(c)}
-                className={`relative pb-4 font-serif text-[clamp(30px,4vw,46px)] font-light transition-colors ${active === c ? "text-foreground" : "text-muted-foreground hover:text-foreground/70"}`}
-              >
-                {c}
-                {active === c && <motion.span layoutId="dot" className="absolute bottom-0 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-foreground" />}
-              </button>
-            ))}
-          </div>
-        </Reveal>
-        <TooltipProvider delayDuration={100}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              role="tabpanel"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.45 }}
-              className="-mx-5 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-3"
-            >
-              {menu[active].map((item) => (
-                <ProductCard key={item.id} item={item} onOrder={onOrder} />
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        </TooltipProvider>
+        <Reveal><div className="flex flex-wrap items-end justify-between gap-6"><div><p className="label-caps text-primary">À la carte</p><h2 className="heading-tight mt-3 text-5xl md:text-6xl">Le goût du matin.</h2></div><Button asChild variant="outline"><a href={carte.url} target="_blank" rel="noreferrer">Voir la carte originale <ArrowUpRight /></a></Button></div></Reveal>
+        <div className="mt-10 grid gap-10 lg:grid-cols-[0.85fr_1.4fr]">
+          <div><img src={moroccan} alt="Illustration du petit-déjeuner marocain" width={1024} height={896} loading="lazy" className="aspect-square w-full rounded-lg object-cover" /><p className="mt-3 text-xs text-muted-foreground">Visuel d’illustration</p><p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">{breakfastIncluded}</p></div>
+          <div><div role="tablist" aria-label="Catégories de la carte" className="flex gap-3 border-b pb-5">{categories.map(c => <Button key={c} role="tab" aria-selected={active === c} variant={active === c ? "default" : "ghost"} onClick={() => setActive(c)}>{c}</Button>)}</div><div role="tabpanel">{menu[active].map(item => <article key={item.id} className="border-b py-5"><div className="flex items-start justify-between gap-5"><h3 className="text-lg font-medium">{item.name}</h3><span className="shrink-0 text-lg font-semibold text-primary">{formatPrice(item.price)}</span></div>{item.description && <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground">{item.description}</p>}</article>)}</div><Button asChild className="mt-6" size="lg"><a href="https://glovoapp.com/" target="_blank" rel="noreferrer">Commander sur Glovo <ArrowUpRight /></a></Button></div>
+        </div>
       </div>
     </section>
   );

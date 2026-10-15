@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep restaurant menu data in src/data/menu.ts and display prices in its configured currency so menu views share one source of truth.
+- Use the shared Logo component for site branding and derive the public favicon from the same logo asset.
