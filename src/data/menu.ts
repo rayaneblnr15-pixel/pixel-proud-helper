@@ -1,53 +1,28 @@
-import bowl1 from "@/assets/bowl-1.jpg";
-import bowl2 from "@/assets/bowl-2.jpg";
-import bowl3 from "@/assets/bowl-3.jpg";
-import side1 from "@/assets/side-1.jpg";
+import breakfast from "@/assets/ocrepino-breakfast.jpg";
+import moroccan from "@/assets/ocrepino-moroccan.jpg";
 
-export type Category = "Salads" | "Warm Bowls" | "Sides";
-
-export interface MenuItem {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  popular?: boolean;
-  glutenFree?: boolean;
-  containsGluten?: boolean;
-  price: number;
-}
-
-export const categories: Category[] = ["Salads", "Warm Bowls", "Sides"];
-
+export type Category = "Petits-déjeuners" | "Suggestions";
+export interface MenuItem { id: string; name: string; description: string; image: string; price: number; popular?: boolean; glutenFree?: boolean; containsGluten?: boolean; }
+export const categories: Category[] = ["Petits-déjeuners", "Suggestions"];
+export const breakfastIncluded = "Tous nos petits-déjeuners et brunchs sont servis avec une boisson chaude au choix (hors spécialités) et une bouteille d’eau de 33 cl.";
 export const menu: Record<Category, MenuItem[]> = {
-  Salads: [
-    { id: "kale-caesar", name: "Kale Caesar", popular: true, price: 13.5, image: bowl1,
-      description: "Roasted chicken, tomatoes, parmesan crisps, shaved parmesan, shredded kale, chopped romaine, lime squeeze, caesar dressing" },
-    { id: "guac-greens", name: "Guacamole Greens", popular: true, price: 14.25, image: bowl2,
-      description: "Roasted chicken, avocado, tomatoes, red onions, shredded cabbage, tortilla chips, spring mix, chopped romaine, lime squeeze, lime cilantro jalapeño vinaigrette" },
-    { id: "buffalo-bowl", name: "Buffalo Chicken Bowl", containsGluten: true, price: 14.5, image: bowl1,
-      description: "Blackened chicken, pickled carrots and celery, tomatoes, cilantro, blue cheese, za'atar breadcrumbs, shredded kale, chopped romaine, hot sauce, caesar dressing" },
+  "Petits-déjeuners": [
+    { id: "expresse", name: "L’Expresse", price: 28, image: breakfast, description: "2 mini viennoiseries, toast grillé, jben, miel, rayb maison, jus d’orange." },
+    { id: "amsterdam", name: "Amsterdam", price: 38, image: breakfast, description: "Toast à l’œuf à la florentine, croque-madame, rayb maison, jus d’orange." },
+    { id: "marocain", name: "Le Marocain", price: 46, image: moroccan, description: "Deux œufs au khlii, assortiment marocain : rghifa, harcha, baghrir, jben, miel, amlou, rayb maison, jus d’orange." },
+    { id: "americain", name: "L’Américain", price: 48, image: breakfast, description: "Deux œufs au plat, merguez de bœuf, potatoes, légumes sautés, coleslaw, pancake sucré, rayb maison, jus d’orange." },
+    { id: "ocrepino", name: "Ôcrepino", price: 54, image: breakfast, description: "Poêle frittata, miniature salée, waffle aux fruits de saison, rayb maison, jus d’orange." },
+    { id: "healthy", name: "Healthy", price: 52, image: breakfast, description: "Pancake sans gluten, œufs mollets à la mimosa, bol d’avoine, millet, fruits frais et secs, rayb maison, jus d’orange." },
+    { id: "kids", name: "Kids", price: 32, image: breakfast, description: "Un bol de muesli aux fruits secs, salade de fruits, pancake Nutella, chocolat chaud." },
   ],
-  "Warm Bowls": [
-    { id: "harvest-bowl", name: "Harvest Bowl", popular: true, glutenFree: true, price: 15, image: bowl3,
-      description: "Blackened chicken, roasted sweet potatoes, warm wild rice, apples, goat cheese, toasted almonds, shredded kale, balsamic vinaigrette" },
-    { id: "miso-glazed", name: "Miso Glazed Salmon", glutenFree: true, price: 17.25, image: bowl3,
-      description: "Miso glazed salmon, warm quinoa, roasted broccoli, cucumber, pickled onions, sesame seeds, spicy cashew dressing" },
-    { id: "chickpea-tagine", name: "Chickpea Tagine", price: 13.75, containsGluten: true, image: bowl3,
-      description: "Spiced roasted chickpeas, warm farro, roasted squash, red onion, herbs, feta, toasted pita crumble, lemon tahini" },
-  ],
-  Sides: [
-    { id: "rosemary-potatoes", name: "Rosemary Potatoes", popular: true, glutenFree: true, price: 5.5, image: side1,
-      description: "Crispy roasted potatoes, fresh rosemary, flaky sea salt, garlic aioli for dipping" },
-    { id: "sweet-potato", name: "Roasted Sweet Potatoes", glutenFree: true, price: 5, image: side1,
-      description: "Caramelized sweet potato cubes, smoked paprika, herbs, lime crema" },
-    { id: "focaccia", name: "Herb Focaccia", containsGluten: true, price: 4, image: side1,
-      description: "House-baked focaccia, olive oil, rosemary, sea salt, whipped herb butter" },
+  Suggestions: [
+    { id: "viennoiserie", name: "Viennoiserie", price: 8, image: breakfast, description: "" },
+    { id: "oeufs", name: "Deux œufs au choix", price: 12, image: breakfast, description: "" },
+    { id: "assortiment", name: "Assortiment marocain", price: 14, image: moroccan, description: "3 pièces." },
+    { id: "croque-mr", name: "Croque-monsieur", price: 18, image: breakfast, description: "" },
+    { id: "tajine", name: "Tajine au khlii / Omelette", price: 20, image: moroccan, description: "Tajine au khlii ou omelette fromage-charcuterie / champignon." },
+    { id: "croque-mme", name: "Croque-madame", price: 22, image: breakfast, description: "" },
   ],
 };
-
-export const addOns = [
-  { id: "avocado", label: "Extra avocado", price: 2 },
-  { id: "chicken", label: "Double chicken", price: 3.5 },
-  { id: "egg", label: "Jammy egg", price: 1.5 },
-  { id: "dressing", label: "Dressing on the side", price: 0 },
-];
+export const addOns: { id: string; label: string; price: number }[] = [];
+export const formatPrice = (price: number) => `${price.toLocaleString("fr-MA")} DH`;
