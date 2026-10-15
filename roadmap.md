@@ -1,3 +1,4 @@
 - [x] Replace Leafwise branding with Ôcrepino logo and colors.
 - [x] Use supplied breakfast menu, DH prices, address, phone and Glovo link.
 - [x] Improve food imagery and verify the updated site.
+- [ ] Make each meal open a dedicated detail page inspired by the supplied reference, and verify navigation.

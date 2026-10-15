@@ -11,3 +11,4 @@
 
 - Keep restaurant menu data in src/data/menu.ts and display prices in its configured currency so menu views share one source of truth.
 - Use the shared Logo component for site branding and derive the public favicon from the same logo asset.
+- Meal details use the /plat/$id route and shared menu data; keep ingredient information derived from the supplied descriptions to avoid inventing recipes.
